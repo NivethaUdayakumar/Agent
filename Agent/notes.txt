@@ -1,0 +1,11 @@
+| Parameter        | Meaning                                  |
+| ---------------- | ---------------------------------------- |
+| `model_path`     | `.gguf` model path                       |
+| `temperature`    | Lower means more stable output           |
+| `max_tokens`     | Maximum answer length                    |
+| `n_ctx`          | Context window size                      |
+| `n_batch`        | Batch size for processing tokens         |
+| `n_threads`      | CPU threads used                         |
+| `n_gpu_layers`   | GPU offload layers, use `0` for CPU only |
+| `repeat_penalty` | Reduces repeated text                    |
+| `top_p`          | Controls randomness                      |

@@ -1,0 +1,273 @@
+Cadence Innovus(TM) Implementation System
+Version: 22.10-s045_1
+Date: Mon May 25 09:14:22 2026
+Host: vlsi-runner-01
+Design: aes_core_top
+Run directory: /project/runs/aes_core_top/innovus_run_0525
+
+============================================================
+STEP 1: DESIGN INITIALIZATION
+============================================================
+
+**INFO: (IMPSYC-1001): Starting Innovus implementation flow.
+**INFO: (IMPSYC-1002): Loading technology LEF: /project/pdk/tsmc28/lef/tech.lef
+**INFO: (IMPSYC-1003): Loading standard cell LEF: /project/pdk/tsmc28/lef/stdcell.lef
+**INFO: (IMPSYC-1004): Loading macro LEF: /project/ip/sram/lef/sram_32kx32.lef
+**INFO: (IMPSYC-1010): Reading Verilog netlist: /project/netlist/aes_core_top.v
+**INFO: (IMPSYC-1011): Top module found: aes_core_top
+**INFO: (IMPSYC-1012): Total instances loaded: 185432
+**INFO: (IMPSYC-1013): Total nets loaded: 192870
+**INFO: (IMPSYC-1014): Total ports loaded: 426
+
+**WARN: (IMPSYC-2021): Multiple timing libraries found for slow corner. Using default library: ss_0p72v_125c.lib
+**WARN: (IMPSYC-2033): Net reset_n has no driving cell. Treated as primary input.
+**WARN: (IMPSYC-2045): Unconnected input pin found: u_debug/u_scan_mux/SE
+
+============================================================
+STEP 2: FLOORPLAN
+============================================================
+
+**INFO: (FPLAN-1001): Initializing floorplan.
+**INFO: (FPLAN-1002): Core utilization target: 72.00%
+**INFO: (FPLAN-1003): Core size: 1120.00 um x 980.00 um
+**INFO: (FPLAN-1004): Row generation completed.
+**INFO: (FPLAN-1012): Placing macro u_sram0 at X=120.00 Y=600.00
+**INFO: (FPLAN-1012): Placing macro u_sram1 at X=760.00 Y=600.00
+**INFO: (FPLAN-1020): IO pin assignment loaded from pins.tcl
+
+**WARN: (FPLAN-2108): Macro u_sram1 is close to right boundary. Distance = 4.20 um, required halo = 6.00 um
+**WARN: (FPLAN-2115): Congestion risk detected near macro channel between u_sram0 and u_sram1.
+
+============================================================
+STEP 3: POWER PLANNING
+============================================================
+
+**INFO: (PWR-1001): Creating power rings for VDD and VSS.
+**INFO: (PWR-1002): Ring width: 2.00 um, spacing: 1.00 um
+**INFO: (PWR-1010): Creating power stripes on M6.
+**INFO: (PWR-1011): Number of VDD stripes created: 42
+**INFO: (PWR-1012): Number of VSS stripes created: 42
+**INFO: (PWR-1020): Running power connectivity check.
+
+**WARN: (PWR-2204): Floating power pin detected: u_debug/u_regfile/U45/VDD
+**WARN: (PWR-2205): Floating ground pin detected: u_debug/u_regfile/U45/VSS
+**ERROR: (PWR-3201): Power net VDD is not connected to 3 instances.
+**ERROR: (PWR-3202): Ground net VSS is not connected to 3 instances.
+
+============================================================
+STEP 4: PLACEMENT
+============================================================
+
+**INFO: (PLACE-1001): Starting global placement.
+**INFO: (PLACE-1002): Placement mode: timing driven
+**INFO: (PLACE-1010): Global placement iteration 1 completed. Overflow = 0.184
+**INFO: (PLACE-1010): Global placement iteration 2 completed. Overflow = 0.092
+**INFO: (PLACE-1010): Global placement iteration 3 completed. Overflow = 0.047
+**INFO: (PLACE-1020): Starting detailed placement.
+**INFO: (PLACE-1030): Detailed placement completed.
+
+**WARN: (PLACE-2303): High local density detected in region X=480.00 Y=430.00 W=120.00 H=100.00
+**WARN: (PLACE-2304): Placement overflow remains above target in 2 bins.
+**WARN: (PLACE-2310): Cell u_crypto_round_7/u_mixcol/U812 moved during legalization.
+
+============================================================
+STEP 5: PRE CTS TIMING
+============================================================
+
+**INFO: (TIME-1001): Running pre CTS timing analysis.
+**INFO: (TIME-1002): Active setup view: slow_ss_0p72v_125c
+**INFO: (TIME-1003): Active hold view: fast_ff_0p88v_m40c
+**INFO: (TIME-1010): Number of clocks: 3
+**INFO: (TIME-1011): Clock: clk_core, period: 1.000 ns
+**INFO: (TIME-1012): Clock: clk_bus, period: 2.500 ns
+**INFO: (TIME-1013): Clock: clk_scan, period: 10.000 ns
+
+**WARN: (TIME-2401): Clock clk_core has ideal network. CTS has not been performed.
+**WARN: (TIME-2408): No input delay defined for port scan_enable.
+**WARN: (TIME-2410): No output delay defined for port debug_data_o[15].
+
+Path Group: clk_core
+  Setup WNS: -0.186 ns
+  Setup TNS: -42.731 ns
+  Setup violating paths: 672
+  Hold WNS: 0.041 ns
+  Hold TNS: 0.000 ns
+
+Worst setup path:
+  Startpoint: u_key_expansion/u_reg_12/Q
+  Endpoint:   u_crypto_round_9/u_sbox/U233/A
+  Required:   1.000 ns
+  Arrival:    1.186 ns
+  Slack:     -0.186 ns
+
+**ERROR: (TIME-3405): Setup timing violation detected. Worst slack = -0.186 ns
+
+============================================================
+STEP 6: CLOCK TREE SYNTHESIS
+============================================================
+
+**INFO: (CTS-1001): Starting clock tree synthesis.
+**INFO: (CTS-1002): Target skew: 0.050 ns
+**INFO: (CTS-1003): Target insertion delay: 0.600 ns
+**INFO: (CTS-1010): Clock tree built for clk_core.
+**INFO: (CTS-1011): Clock tree built for clk_bus.
+**INFO: (CTS-1012): Clock tree built for clk_scan.
+**INFO: (CTS-1020): Clock tree optimization completed.
+
+Clock summary:
+  clk_core insertion delay: 0.734 ns
+  clk_core skew: 0.082 ns
+  clk_bus insertion delay: 0.512 ns
+  clk_bus skew: 0.039 ns
+  clk_scan insertion delay: 0.401 ns
+  clk_scan skew: 0.021 ns
+
+**WARN: (CTS-2502): Clock clk_core skew 0.082 ns exceeds target 0.050 ns.
+**WARN: (CTS-2510): Buffer insertion limited by placement blockage near X=540.00 Y=465.00.
+
+============================================================
+STEP 7: POST CTS TIMING
+============================================================
+
+**INFO: (TIME-1101): Running post CTS timing analysis.
+
+Path Group: clk_core
+  Setup WNS: -0.241 ns
+  Setup TNS: -65.218 ns
+  Setup violating paths: 914
+  Hold WNS: -0.032 ns
+  Hold TNS: -1.442 ns
+  Hold violating paths: 38
+
+Worst hold path:
+  Startpoint: u_control/u_state_reg_3/Q
+  Endpoint:   u_control/u_next_state_reg_1/D
+  Required:   0.000 ns
+  Arrival:   -0.032 ns
+  Slack:     -0.032 ns
+
+**ERROR: (TIME-3410): Hold timing violation detected. Worst slack = -0.032 ns
+**ERROR: (TIME-3405): Setup timing violation detected. Worst slack = -0.241 ns
+
+============================================================
+STEP 8: ROUTING
+============================================================
+
+**INFO: (ROUTE-1001): Starting global routing.
+**INFO: (ROUTE-1002): Routing layers: M1 to M8
+**INFO: (ROUTE-1010): Global route completed.
+**INFO: (ROUTE-1020): Starting detailed routing.
+**INFO: (ROUTE-1030): Detailed routing iteration 1 completed.
+**INFO: (ROUTE-1031): DRC count after iteration 1: 214
+**INFO: (ROUTE-1030): Detailed routing iteration 2 completed.
+**INFO: (ROUTE-1031): DRC count after iteration 2: 47
+**INFO: (ROUTE-1030): Detailed routing iteration 3 completed.
+**INFO: (ROUTE-1031): DRC count after iteration 3: 19
+
+**WARN: (ROUTE-2604): Congestion hot spot on M3 near X=510.00 Y=450.00
+**WARN: (ROUTE-2609): Detour routing increased net delay on net n_crypto_round_9_sbox_out[3]
+**ERROR: (ROUTE-3601): Short violation detected between net VDD and net n_debug_ctrl_12 at M4 X=623.45 Y=388.20
+**ERROR: (ROUTE-3602): Spacing violation on M2 near X=501.30 Y=447.80
+**ERROR: (ROUTE-3603): Minimum area violation on M1 near X=722.14 Y=218.67
+
+============================================================
+STEP 9: POST ROUTE TIMING
+============================================================
+
+**INFO: (TIME-1201): Running post route extracted timing.
+**INFO: (TIME-1202): SPEF file loaded: aes_core_top.postroute.spef
+**INFO: (TIME-1203): RC corner: rcworst
+
+Path Group: clk_core
+  Setup WNS: -0.318 ns
+  Setup TNS: -103.552 ns
+  Setup violating paths: 1378
+  Hold WNS: -0.074 ns
+  Hold TNS: -4.861 ns
+  Hold violating paths: 112
+
+Path Group: clk_bus
+  Setup WNS: -0.046 ns
+  Setup TNS: -3.412 ns
+  Setup violating paths: 22
+  Hold WNS: 0.012 ns
+  Hold TNS: 0.000 ns
+  Hold violating paths: 0
+
+Worst setup path:
+  Startpoint: u_key_expansion/u_reg_12/Q
+  Endpoint:   u_crypto_round_9/u_sbox/U233/A
+  Required:   1.000 ns
+  Arrival:    1.318 ns
+  Slack:     -0.318 ns
+  Net delay:  0.492 ns
+  Cell delay: 0.826 ns
+
+Worst hold path:
+  Startpoint: u_control/u_state_reg_3/Q
+  Endpoint:   u_control/u_next_state_reg_1/D
+  Required:   0.000 ns
+  Arrival:   -0.074 ns
+  Slack:     -0.074 ns
+
+**ERROR: (TIME-3405): Setup timing violation detected. Worst slack = -0.318 ns
+**ERROR: (TIME-3410): Hold timing violation detected. Worst slack = -0.074 ns
+**WARN: (TIME-2422): Large net delay contribution detected on n_crypto_round_9_sbox_out[3].
+
+============================================================
+STEP 10: SIGNOFF CHECKS
+============================================================
+
+**INFO: (SIGNOFF-1001): Running geometry verification.
+**INFO: (SIGNOFF-1002): Running connectivity verification.
+**INFO: (SIGNOFF-1003): Running timing signoff checks.
+
+DRC Summary:
+  Total DRC violations: 19
+  Short violations: 3
+  Spacing violations: 11
+  Min area violations: 5
+
+LVS Summary:
+  Total LVS errors: 2
+  Unmatched instances: 1
+  Unmatched nets: 1
+
+Timing Summary:
+  Setup WNS: -0.318 ns
+  Setup TNS: -103.552 ns
+  Hold WNS: -0.074 ns
+  Hold TNS: -4.861 ns
+
+**ERROR: (SIGNOFF-3701): DRC signoff failed. Total violations = 19
+**ERROR: (SIGNOFF-3702): LVS signoff failed. Total errors = 2
+**ERROR: (SIGNOFF-3703): Timing signoff failed.
+
+============================================================
+FINAL RUN SUMMARY
+============================================================
+
+Design: aes_core_top
+Status: FAILED
+
+Warnings:
+  Total warnings: 17
+
+Errors:
+  Total errors: 14
+
+Main failure categories:
+  1. Power connectivity errors
+  2. Setup and hold timing violations
+  3. Routing DRC violations
+  4. LVS mismatch
+
+Recommended debug focus:
+  1. Fix floating VDD/VSS pins in u_debug/u_regfile/U45.
+  2. Reduce congestion near macro channel between u_sram0 and u_sram1.
+  3. Optimize critical setup path through u_key_expansion to u_crypto_round_9.
+  4. Fix hold path in u_control state transition logic.
+  5. Resolve DRC shorts and spacing violations before final signoff.
+
+**FATAL: (IMPFLOW-9001): Innovus implementation flow failed due to signoff errors.
+**INFO: (IMPSYC-1999): Innovus session ended.
